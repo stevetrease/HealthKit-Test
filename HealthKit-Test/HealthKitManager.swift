@@ -101,9 +101,10 @@ class HealthKitManager {
     func countOfWorkoutTypes () -> Int {
         var types: [HKWorkoutActivityType] = []
         for item in workoutData {
-            types.append (item.workoutActivityType)
+            if !types.contains(item.workoutActivityType) {
+                types.append(item.workoutActivityType)
+            }
         }
-        types = Array(Set(types))
         return types.count
     }
     
