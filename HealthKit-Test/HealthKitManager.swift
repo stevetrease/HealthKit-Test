@@ -18,6 +18,9 @@ class HealthKitManager {
     
     static let sharedInstance = HealthKitManager()
     let healthStore = HKHealthStore()
+
+    private var filtered: Bool = true
+    private var filterCriteria: HKWorkoutActivityType = .swimming
     
     private let cal = Calendar.current
     
@@ -70,7 +73,13 @@ class HealthKitManager {
                 
                 for result in results {
                     if let workout = result as? HKWorkout {
-                        self.workoutData.append(workout)
+                        if (self.filtered == false) {
+                            self.workoutData.append(workout)
+                        } else {
+                            if (workout.workoutActivityType == self.filterCriteria) {
+                                self.workoutData.append(workout)
+                            }
+                        }
                     }
                 }
             }
@@ -91,6 +100,8 @@ class HealthKitManager {
             return ("🏃")
         case HKWorkoutActivityType.walking:
             return ("🚶")
+        case HKWorkoutActivityType.swimming:
+            return ("🏊🏻‍♂️")
         default:
             return ("?")
         }
