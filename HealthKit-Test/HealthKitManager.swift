@@ -97,6 +97,34 @@ class HealthKitManager {
     }
     
     
+    
+    func countOfWorkoutTypes () -> Int {
+        var types: [HKWorkoutActivityType] = []
+        for item in workoutData {
+            types.append (item.workoutActivityType)
+        }
+        types = Array(Set(types))
+        return types.count
+    }
+    
+    
+    
+    func returnWorkoutType (ordinal: Int) -> HKWorkoutActivityType {
+        var types: [HKWorkoutActivityType] = []
+        for item in workoutData {
+            types.append (item.workoutActivityType)
+        }
+        types = Array(Set(types))
+        
+        if (ordinal > types.count || ordinal < 0) {
+            return .other
+        } else {
+            return types[ordinal]
+        }
+    }
+    
+    
+    
     private func checkHealthKitAuthorization() ->() {
         // Default to assuming that we're authorized
         var isHealthKitEnabled = true

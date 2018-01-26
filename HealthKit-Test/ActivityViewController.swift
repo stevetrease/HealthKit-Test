@@ -13,6 +13,9 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     
     let healthStore = HKHealthStore()
     let cal = Calendar.current
+    
+    let filterOrdinal = 0
+    
        
     
     override func viewDidLoad() {
@@ -172,5 +175,7 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     @IBAction func screenTappedTriggered(sender: AnyObject) {
         print (NSURL (fileURLWithPath: "\(#file)").lastPathComponent!, "\(#function)")
         getData()
+        
+        print (healthKitManager.countOfWorkoutTypes())
     }
 }
